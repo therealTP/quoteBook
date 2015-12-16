@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html ng-app="quoteBook">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
+  </head>
+  <body ng-controller="quoteBookCtrl">
+
+    <div class="action-field" ng-show="!addHidden">
+      <h4>Add Quote </h4>
+      <p>
+        New Quote:
+      </p>
+      <input ng-model="newQuote" type="text">
+      <p>
+        New Author:
+      </p>
+      <input ng-model="newAuthor" type="text">
+      <button ng-click="addQuote(newQuote, newAuthor)">Add Quote</button>        <button ng-click="addHidden = !addHidden">Or, Filter/Sort Quotes</button>
+    </div>
+    <div class="action-field" ng-show="addHidden">
+    <div class="filter-field">
+      <h4>Filter Quotes: </h4>
+      By Text: <input ng-model="myFilter.text" type="text"><br/>
+      By Author: <input ng-model="myFilter.author" type="text">
+    </div>
+    <div class="sort-field">
+      <h4>Sort Quotes: </h4>
+      Field:
+      <select ng-model="sortSelect">
+        <option value="text">
+          Text
+        </option>
+        <option value="author">
+          Author
+        </option>
+      </select>
+      </select>
+      Order:
+      <select ng-model="sortOrder">
+        <option value="+">
+          A - Z
+        </option>
+        <option value="-">
+          Z - A
+        </option>
+      </select>
+    </div>
+    <button ng-click="addHidden = !addHidden">Or, Add New Quote</button>
+    </div>
+
+
+
+    <table>
+      <thead>
+        <tr>
+          <td>Quote</td>
+          <td>Author</td>
+          <td>Remove?</td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="quote in allData | filter:myFilter | orderBy:sortOrder + sortSelect">
+          <td>{{quote.text}}</td>
+          <td>{{quote.author}}</td>
+          <td>
+            <button ng-click="removeQuote(quote.text)" type="button" name="button">X</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/mainCtrl.js"></script>
+    <script src="js/dataService.js"></script>
+    <script src="js/storageService.js"></script>
+
+
+    </script>
+  </body>
+</html>

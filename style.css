@@ -1,0 +1,36 @@
+.action-field {
+  border: 1px solid black;
+  height: 250px;
+  width: 275px;
+  position: relative;
+  padding: 0 20px;
+}
+
+  .action-field button {
+    display: block;
+    margin-top: 10px;
+  }
+
+
+  .action-field input {
+    width: 150px;
+  }
+
+
+table {
+  clear: both;
+}
+  table tr {
+    height: 60px;
+  }
+    thead {
+      font-weight: bold;
+    }
+    table td {
+      padding: 5px;
+      border: 1px solid black;
+    }
+
+    tbody tr td:first-child {
+      font-style: italic;
+    }
