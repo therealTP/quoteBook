@@ -8,15 +8,22 @@ angular.module('quoteBook').controller('quoteBookCtrl', function($scope, quoteSv
   $scope.getData();
 
   $scope.addQuote = function(text, auth) {
-    quoteSvc.addData({'text': text, 'author': auth});
-    console.log(quoteSvc.getData()); // local storage is updating
-    console.log($scope.allData); // view (based on all data) not updating
+    var newQuote = {'text': text, 'author': auth};
+    // update alldata for real time view update
+    $scope.allData.push(newQuote);
+    // add new quote to localstorage
+    quoteSvc.addData(newQuote);
   };
 
   $scope.removeQuote = function(quote) {
+    // remove quote from $scope.allData to update view
+    for (var i = 0; i < $scope.allData.length; i++) {
+      if ($scope.allData[i].text === quote) {
+        $scope.allData.splice(i, 1);
+      }
+    }
+    // remove quote from local storage
     quoteSvc.removeData(quote);
-    console.log(quoteSvc.getData());
-    console.log($scope.allData);
   };
 
   $scope.addHidden = false;
